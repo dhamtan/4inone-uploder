@@ -1,7 +1,139 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<body style="text-align:center; padding:50px;">
-<h1>🚀 Video Upload Site</h1>
-<p>Setup complete! अब IFTTT connect करेंगे...</p>
+<head>
+<title>🚀 4-in-1 FREE Video Uploader - Live Everywhere!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { 
+  font-family: 'Arial', sans-serif; 
+  text-align: center; 
+  padding: 30px; 
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  min-height: 100vh;
+}
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.1);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+input[type="file"], input[type="text"] { 
+  width: 90%; 
+  padding: 15px; 
+  margin: 10px 0; 
+  border: none; 
+  border-radius: 12px; 
+  font-size: 16px;
+  background: rgba(255,255,255,0.9);
+}
+#uploadBtn { 
+  width: 100%; 
+  padding: 20px; 
+  margin: 20px 0; 
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  color: white; 
+  font-size: 22px; 
+  font-weight: bold;
+  border: none; 
+  border-radius: 15px; 
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+#uploadBtn:hover { transform: scale(1.02); }
+.platforms {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 15px; 
+  margin-top: 30px;
+}
+.platform-btn {
+  padding: 20px; 
+  text-decoration: none; 
+  border-radius: 15px; 
+  font-weight: bold; 
+  font-size: 18px; 
+  transition: all 0.3s;
+  display: block;
+}
+.platform-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+.yt { background: linear-gradient(45deg, #ff0000, #cc0000); color: white; }
+.fb { background: linear-gradient(45deg, #4267b2, #365899); color: white; }
+.insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366); color: white; }
+.twitter { background: linear-gradient(45deg, #1da1f2, #0d8bd9); color: white; }
+#status { 
+  margin-top: 20px; 
+  padding: 15px; 
+  background: rgba(0,255,0,0.2); 
+  border-radius: 10px; 
+  font-size: 18px; 
+  font-weight: bold;
+}
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🔥 4-in-1 Video Uploader</h1>
+  <p><strong>Video → Title → Button → 30 सेकंड में 4 जगह LIVE!</strong></p>
+
+  <input type="file" id="video" accept="video/*">
+  <input type="text" id="title" placeholder="Video Title लिखो (जैसे: Lamborghini Revving!)">
+
+  <button id="uploadBtn" onclick="magicUpload()">🚀 सभी 4 Platforms पर भेजो!</button>
+
+  <div class="platforms hidden" id="platforms">
+    <a href="https://studio.youtube.com/channel/UC_l1oBZyJfmI8kH7oQfFbcg/manage/videos?filter=%2Fuploads" target="_blank" class="platform-btn yt">📱 YouTube Studio</a>
+    <a href="https://www.facebook.com" target="_blank" class="platform-btn fb">📘 Facebook</a>
+    <a href="https://www.instagram.com" target="_blank" class="platform-btn insta">📸 Instagram</a>
+    <a href="https://twitter.com" target="_blank" class="platform-btn twitter">🐦 Twitter (X)</a>
+  </div>
+
+  <div id="status"></div>
+</div>
+
+<script>
+function magicUpload() {
+  const video = document.getElementById('video').files[0];
+  const title = document.getElementById('title').value.trim();
+  
+  if (!video) {
+    alert('❌ पहले Video file select करो (.mp4)');
+    return;
+  }
+  
+  if (!title) {
+    alert('❌ Video Title भर (जैसे: "Lamborghini Short")');
+    return;
+  }
+  
+  // Title + hashtags copy to clipboard
+  const postText = `🚀 ${title}
+
+#shorts #viral #foryou #trending #youtube`;
+  navigator.clipboard.writeText(postText);
+  
+  // Show platforms + success message
+  document.getElementById('platforms').classList.remove('hidden');
+  document.getElementById('status').innerHTML = `
+    ✅ "${title}" copied! 
+    📋 नीचे 4 buttons दबाओ → Video paste करो
+    ⏱️ 30 सेकंड में सभी जगह LIVE!
+  `;
+  document.getElementById('uploadBtn').innerHTML = '✅ Ready! Daily 100+ Videos';
+  document.getElementById('uploadBtn').style.background = '#28a745';
+  
+  // Scroll to platforms
+  document.getElementById('platforms').scrollIntoView({ behavior: 'smooth' });
+  
+  alert(`🎉 "${title}" ready! 
+  📋 Title copied clipboard में
+  👆 नीचे 4 colored buttons दबाओ
+  🎥 Video drag-drop करो हर tab में
+  🔥 30 sec में 4 जगह live!`);
+}
+</script>
 </body>
 </html>
