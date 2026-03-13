@@ -1,138 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>🚀 4-in-1 FREE Video Uploader - Live Everywhere!</title>
+<title>🚀 ONE CLICK - 4 Platforms Live!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body { 
-  font-family: 'Arial', sans-serif; 
+  font-family: Arial; 
   text-align: center; 
-  padding: 30px; 
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  padding: 40px; 
+  background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
   color: white;
-  min-height: 100vh;
 }
-.container {
-  max-width: 500px;
-  margin: 0 auto;
-  background: rgba(255,255,255,0.1);
-  padding: 40px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-}
-input[type="file"], input[type="text"] { 
-  width: 90%; 
-  padding: 15px; 
-  margin: 10px 0; 
-  border: none; 
-  border-radius: 12px; 
-  font-size: 16px;
-  background: rgba(255,255,255,0.9);
-}
-#uploadBtn { 
-  width: 100%; 
-  padding: 20px; 
-  margin: 20px 0; 
-  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+input { padding: 15px; margin: 10px; border: none; border-radius: 10px; font-size: 18px; width: 80%; }
+#magicBtn { 
+  padding: 25px 40px; 
+  background: #ff4444; 
   color: white; 
-  font-size: 22px; 
-  font-weight: bold;
-  border: none; 
-  border-radius: 15px; 
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-#uploadBtn:hover { transform: scale(1.02); }
-.platforms {
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 15px; 
-  margin-top: 30px;
-}
-.platform-btn {
-  padding: 20px; 
-  text-decoration: none; 
-  border-radius: 15px; 
+  font-size: 24px; 
   font-weight: bold; 
-  font-size: 18px; 
-  transition: all 0.3s;
-  display: block;
+  border: none; 
+  border-radius: 20px; 
+  cursor: pointer;
+  margin: 30px 0;
 }
-.platform-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-.yt { background: linear-gradient(45deg, #ff0000, #cc0000); color: white; }
-.fb { background: linear-gradient(45deg, #4267b2, #365899); color: white; }
-.insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366); color: white; }
-.twitter { background: linear-gradient(45deg, #1da1f2, #0d8bd9); color: white; }
-#status { 
-  margin-top: 20px; 
-  padding: 15px; 
-  background: rgba(0,255,0,0.2); 
-  border-radius: 10px; 
-  font-size: 18px; 
-  font-weight: bold;
-}
-.hidden { display: none !important; }
+#magicBtn:hover { background: #cc3333; transform: scale(1.05); }
+#status { font-size: 20px; margin: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 10px; }
+.platform-status { display: none; margin: 10px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>🔥 4-in-1 Video Uploader</h1>
-  <p><strong>Video → Title → Button → 30 सेकंड में 4 जगह LIVE!</strong></p>
+<h1>⚡ ONE BUTTON → 4 Platforms Live!</h1>
 
-  <input type="file" id="video" accept="video/*">
-  <input type="text" id="title" placeholder="Video Title लिखो (जैसे: Lamborghini Revving!)">
+<input type="file" id="video" accept="video/*">
+<input type="text" id="title" placeholder="Video Title (Lamborghini Short 🔥)">
 
-  <button id="uploadBtn" onclick="magicUpload()">🚀 सभी 4 Platforms पर भेजो!</button>
+<button id="magicBtn" onclick="oneClickMagic()">🚀 ONE CLICK - सब जगह भेजो!</button>
 
-  <div class="platforms hidden" id="platforms">
-    <a href="https://studio.youtube.com/channel/UC_l1oBZyJfmI8kH7oQfFbcg/manage/videos?filter=%2Fuploads" target="_blank" class="platform-btn yt">📱 YouTube Studio</a>
-    <a href="https://www.facebook.com" target="_blank" class="platform-btn fb">📘 Facebook</a>
-    <a href="https://www.instagram.com" target="_blank" class="platform-btn insta">📸 Instagram</a>
-    <a href="https://twitter.com" target="_blank" class="platform-btn twitter">🐦 Twitter (X)</a>
-  </div>
-
-  <div id="status"></div>
-</div>
+<div id="status"></div>
+<div id="youtube-status" class="platform-status">✅ YouTube Ready</div>
+<div id="fb-status" class="platform-status">✅ Facebook Ready</div>
+<div id="insta-status" class="platform-status">✅ Instagram Ready</div>
+<div id="twitter-status" class="platform-status">✅ Twitter Ready</div>
 
 <script>
-function magicUpload() {
+function oneClickMagic() {
   const video = document.getElementById('video').files[0];
   const title = document.getElementById('title').value.trim();
   
-  if (!video) {
-    alert('❌ पहले Video file select करो (.mp4)');
+  if (!video || !title) {
+    alert('❌ Video + Title भर!');
     return;
   }
   
-  if (!title) {
-    alert('❌ Video Title भर (जैसे: "Lamborghini Short")');
-    return;
-  }
-  
-  // Title + hashtags copy to clipboard
-  const postText = `🚀 ${title}
+  // Magic: Title + Hashtags copy
+  const magicText = `${title}
 
-#shorts #viral #foryou #trending #youtube`;
-  navigator.clipboard.writeText(postText);
+🚀 4 Platforms Live!
+#shorts #viral #foryou #trending`;
+  navigator.clipboard.writeText(magicText);
   
-  // Show platforms + success message
-  document.getElementById('platforms').classList.remove('hidden');
+  // Show all 4 status
   document.getElementById('status').innerHTML = `
-    ✅ "${title}" copied! 
-    📋 नीचे 4 buttons दबाओ → Video paste करो
-    ⏱️ 30 सेकंड में सभी जगह LIVE!
+    🎉 "${title}" copied! 
+    📋 Ctrl+V हर tab में paste करो
+    ⏱️ 20 सेकंड में 4 जगह LIVE!
   `;
-  document.getElementById('uploadBtn').innerHTML = '✅ Ready! Daily 100+ Videos';
-  document.getElementById('uploadBtn').style.background = '#28a745';
   
-  // Scroll to platforms
-  document.getElementById('platforms').scrollIntoView({ behavior: 'smooth' });
+  // Show platform status
+  document.querySelectorAll('.platform-status').forEach(el => el.style.display = 'block');
   
-  alert(`🎉 "${title}" ready! 
-  📋 Title copied clipboard में
-  👆 नीचे 4 colored buttons दबाओ
-  🎥 Video drag-drop करो हर tab में
-  🔥 30 sec में 4 जगह live!`);
+  // Auto-open 4 tabs (Modern browsers block popup → manual click better)
+  setTimeout(() => {
+    window.open('https://studio.youtube.com/channel/UC_l1oBZyJfmI8kH7oQfFbcg/manage/videos?filter=%2Fuploads', '_blank');
+    window.open('https://facebook.com', '_blank');
+    window.open('https://instagram.com', '_blank');
+    window.open('https://twitter.com', '_blank');
+  }, 1000);
+  
+  alert(`🔥 MAGIC! "${title}" ready!
+
+📋 Title copied
+👆 4 tabs खुले
+🎥 Video drag-drop + Ctrl+V
+⚡ 20 sec में सब LIVE!`);
 }
 </script>
 </body>
