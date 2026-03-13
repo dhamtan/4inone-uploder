@@ -1,89 +1,370 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>🚀 ONE CLICK - 4 Platforms Live!</title>
+<title>🚀 4-in-1 FREE Video Uploader - Live Everywhere!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 body { 
-  font-family: Arial; 
+  font-family: 'Poppins', sans-serif; 
   text-align: center; 
-  padding: 40px; 
-  background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-  color: white;
+  padding: 20px; 
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24, #f0932b, #eb4d4b);
+  background-size: 600% 600%;
+  animation: gradientShift 12s ease infinite;
+  position: relative;
+  overflow-x: hidden;
 }
-input { padding: 15px; margin: 10px; border: none; border-radius: 10px; font-size: 18px; width: 80%; }
-#magicBtn { 
-  padding: 25px 40px; 
-  background: #ff4444; 
-  color: white; 
-  font-size: 24px; 
-  font-weight: bold; 
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating Social Media Icons */
+.floating-icons {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.float-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: white;
+  text-decoration: none;
+  animation: float 4s ease-in-out infinite;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+}
+
+.float-icon:hover {
+  transform: scale(1.1) rotate(360deg);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+.float-icon:nth-child(1) { background: linear-gradient(135deg, #FF0000, #CC0000); animation-delay: 0s; }
+.float-icon:nth-child(2) { background: linear-gradient(135deg, #4267B2, #365899); animation-delay: 0.3s; }
+.float-icon:nth-child(3) { background: linear-gradient(135deg, #F09433, #E6683C, #DC2743, #CC2366); animation-delay: 0.6s; }
+.float-icon:nth-child(4) { background: linear-gradient(135deg, #1DA1F2, #0D8BD9); animation-delay: 0.9s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Particles */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  animation: particleFloat 25s linear infinite;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 40px 30px;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 10;
+  animation: containerSlide 1s ease-out;
+}
+
+@keyframes containerSlide {
+  0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+h1 {
+  font-size: clamp(28px, 6vw, 40px);
+  font-weight: 800;
+  margin-bottom: 15px;
+  background: linear-gradient(45deg, #fff, #f0f8ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+p { 
+  font-size: clamp(14px, 3vw, 18px); 
+  margin-bottom: 35px; 
+  opacity: 0.95;
+  line-height: 1.5;
+}
+
+input[type="file"], input[type="text"] { 
+  width: 100%; 
+  padding: 20px 25px; 
+  margin: 15px 0; 
   border: none; 
   border-radius: 20px; 
-  cursor: pointer;
-  margin: 30px 0;
+  font-size: 18px;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: all 0.4s ease;
+  font-family: 'Poppins', sans-serif;
 }
-#magicBtn:hover { background: #cc3333; transform: scale(1.05); }
-#status { font-size: 20px; margin: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 10px; }
-.platform-status { display: none; margin: 10px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+input[type="file"]:hover, input[type="text"]:focus {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  outline: none;
+}
+
+#uploadBtn { 
+  width: 100%; 
+  padding: 25px; 
+  margin: 30px 0; 
+  background: linear-gradient(45deg, #FF6B6B, #FECA57, #FF9FF3, #54A0FF);
+  background-size: 400% 400%;
+  animation: gradientMove 3s ease infinite;
+  color: white; 
+  font-size: clamp(20px, 4vw, 24px); 
+  font-weight: 800;
+  border: none; 
+  border-radius: 25px; 
+  cursor: pointer;
+  box-shadow: 
+    0 20px 40px rgba(255,107,107,0.4),
+    inset 0 -8px 20px rgba(255,255,255,0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#uploadBtn:hover { 
+  transform: translateY(-8px) scale(1.05); 
+  box-shadow: 0 30px 60px rgba(255,107,107,0.5);
+}
+
+#uploadBtn:active { 
+  transform: translateY(-2px) scale(1.02); 
+}
+
+.platforms {
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+  gap: 20px; 
+  margin-top: 30px;
+  opacity: 0;
+  transform: scale(0.8) translateY(30px);
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.platforms.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.platform-btn {
+  padding: 22px 15px; 
+  text-decoration: none; 
+  border-radius: 20px; 
+  font-weight: 700; 
+  font-size: clamp(14px, 3vw, 16px); 
+  transition: all 0.4s ease;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.platform-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.6s;
+}
+
+.platform-btn:hover::before { left: 100%; }
+
+.platform-btn:hover { 
+  transform: translateY(-10px) scale(1.08); 
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+}
+
+.yt { background: linear-gradient(135deg, #FF0000, #CC0000); color: white; }
+.fb { background: linear-gradient(135deg, #4267B2, #365899); color: white; }
+.insta { background: linear-gradient(135deg, #F09433, #E6683C, #DC2743, #CC2366); color: white; }
+.twitter { background: linear-gradient(135deg, #1DA1F2, #0D8BD9); color: white; }
+
+#status { 
+  margin-top: 25px; 
+  padding: 20px; 
+  background: linear-gradient(135deg, rgba(40,167,69,0.9), rgba(46,204,113,0.8));
+  border-radius: 20px; 
+  font-size: 18px; 
+  font-weight: 700;
+  color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+#status.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hidden { display: none !important; }
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .container { padding: 30px 20px; margin: 10px; }
+  .floating-icons { top: 15px; left: 15px; }
+  .float-icon { width: 45px; height: 45px; font-size: 18px; }
+  .platform-btn { padding: 18px 12px; font-size: 14px; }
+}
 </style>
 </head>
 <body>
-<h1>⚡ ONE BUTTON → 4 Platforms Live!</h1>
+<!-- Floating Premium Social Icons -->
+<div class="floating-icons">
+  <a href="https://youtube.com" target="_blank" class="float-icon" title="YouTube">🎥</a>
+  <a href="https://facebook.com" target="_blank" class="float-icon" title="Facebook">📘</a>
+  <a href="https://instagram.com" target="_blank" class="float-icon" title="Instagram">📸</a>
+  <a href="https://twitter.com" target="_blank" class="float-icon" title="Twitter">🐦</a>
+</div>
 
-<input type="file" id="video" accept="video/*">
-<input type="text" id="title" placeholder="Video Title (Lamborghini Short 🔥)">
+<!-- Animated Particles -->
+<div class="particles" id="particles"></div>
 
-<button id="magicBtn" onclick="oneClickMagic()">🚀 ONE CLICK - सब जगह भेजो!</button>
+<div class="container">
+  <h1>🔥 4-in-1 Premium Uploader</h1>
+  <p><strong>Video → Title → Magic → 30 सेकंड में 4 जगह LIVE! ⚡</strong></p>
 
-<div id="status"></div>
-<div id="youtube-status" class="platform-status">✅ YouTube Ready</div>
-<div id="fb-status" class="platform-status">✅ Facebook Ready</div>
-<div id="insta-status" class="platform-status">✅ Instagram Ready</div>
-<div id="twitter-status" class="platform-status">✅ Twitter Ready</div>
+  <input type="file" id="video" accept="video/*">
+  <input type="text" id="title" placeholder="Video Title लिखो (जैसे: Lamborghini Revving!)">
+
+  <button id="uploadBtn" onclick="magicUpload()">🚀 सभी 4 Premium Platforms पर भेजो!</button>
+
+  <div class="platforms hidden" id="platforms">
+    <a href="https://studio.youtube.com/channel/UC_l1oBZyJfmI8kH7oQfFbcg/manage/videos?filter=%2Fuploads" target="_blank" class="platform-btn yt">📱 YouTube Studio</a>
+    <a href="https://www.facebook.com" target="_blank" class="platform-btn fb">📘 Facebook</a>
+    <a href="https://www.instagram.com" target="_blank" class="platform-btn insta">📸 Instagram</a>
+    <a href="https://twitter.com" target="_blank" class="platform-btn twitter">🐦 Twitter (X)</a>
+  </div>
+
+  <div id="status"></div>
+</div>
 
 <script>
-function oneClickMagic() {
+function magicUpload() {
   const video = document.getElementById('video').files[0];
   const title = document.getElementById('title').value.trim();
   
-  if (!video || !title) {
-    alert('❌ Video + Title भर!');
+  if (!video) {
+    alert('❌ पहले Video file select करो (.mp4)');
     return;
   }
   
-  // Magic: Title + Hashtags copy
-  const magicText = `${title}
+  if (!title) {
+    alert('❌ Video Title भर (जैसे: "Lamborghini Short")');
+    return;
+  }
+  
+  // Premium Title + Hashtags copy
+  const postText = `🚀 ${title}
 
-🚀 4 Platforms Live!
-#shorts #viral #foryou #trending`;
-  navigator.clipboard.writeText(magicText);
+#shorts #viral #foryou #trending #premium`;
+  navigator.clipboard.writeText(postText);
   
-  // Show all 4 status
+  // Show platforms + Premium status
+  document.getElementById('platforms').classList.remove('hidden');
+  document.getElementById('platforms').classList.add('show');
+  
   document.getElementById('status').innerHTML = `
-    🎉 "${title}" copied! 
-    📋 Ctrl+V हर tab में paste करो
-    ⏱️ 20 सेकंड में 4 जगह LIVE!
+    🎉 "${title}" Premium Ready! 
+    📋 Title copied clipboard में
+    👆 नीचे 4 Premium buttons दबाओ
+    ⏱️ 30 सेकंड में सभी जगह LIVE! 🔥
   `;
+  document.getElementById('status').classList.add('show');
   
-  // Show platform status
-  document.querySelectorAll('.platform-status').forEach(el => el.style.display = 'block');
+  document.getElementById('uploadBtn').innerHTML = '✅ Premium Ready! Daily 100 Videos';
+  document.getElementById('uploadBtn').style.background = 'linear-gradient(45deg, #28a745, #20c997)';
   
-  // Auto-open 4 tabs (Modern browsers block popup → manual click better)
+  // Auto scroll to platforms
+  document.getElementById('platforms').scrollIntoView({ behavior: 'smooth' });
+  
+  // Auto-open tabs (modern browsers)
   setTimeout(() => {
     window.open('https://studio.youtube.com/channel/UC_l1oBZyJfmI8kH7oQfFbcg/manage/videos?filter=%2Fuploads', '_blank');
-    window.open('https://facebook.com', '_blank');
-    window.open('https://instagram.com', '_blank');
+    window.open('https://www.facebook.com', '_blank');
+    window.open('https://www.instagram.com', '_blank');
     window.open('https://twitter.com', '_blank');
-  }, 1000);
+  }, 1500);
   
-  alert(`🔥 MAGIC! "${title}" ready!
+  alert(`🎉 PREMIUM MAGIC ACTIVE!
 
-📋 Title copied
-👆 4 tabs खुले
-🎥 Video drag-drop + Ctrl+V
-⚡ 20 sec में सब LIVE!`);
+"${title}" copied!
+4 tabs opening...
+Video drag-drop → 30 sec में LIVE! 🔥`);
 }
+
+// Create animated particles
+function createParticles() {
+  const particlesContainer = document.getElementById('particles');
+  for (let i = 0; i < 50; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 25 + 's';
+    particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    particlesContainer.appendChild(particle);
+  }
+}
+
+createParticles();
 </script>
 </body>
 </html>
